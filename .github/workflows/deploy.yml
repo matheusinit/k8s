@@ -33,4 +33,4 @@ jobs:
     - name: Deploy
       run: |-
         gcloud auth list
-        kubectl get services -o wide
+        kubectl config current-context
