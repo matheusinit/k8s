@@ -33,4 +33,4 @@ jobs:
     - name: Deploy
       run: |-
         gcloud auth list
-        kubectl config current-context
+        kubectl config view --minify
