@@ -21,13 +21,13 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    # Setup gcloud CLI
-    - uses: google-github-actions/setup-gcloud@v2
-
      # Get the GKE credentials so we can deploy to the cluster
     - uses: google-github-actions/auth@v2
       with:
         credentials_json: ${{ secrets.CREDENTIALS_JSON }}
+
+    # Setup gcloud CLI
+    - uses: google-github-actions/setup-gcloud@v2
 
     # Configure Docker to use the gcloud command-line tool as a credential
     # helper for authentication
