@@ -29,8 +29,11 @@ jobs:
     # Setup gcloud CLI
     - uses: google-github-actions/setup-gcloud@v2
 
+    - name: Install gke-gcloud-auth-plugin
+      run: gcloud components install kubectl
+
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
       run: |-
-        gcloud auth list
+        gcloud container clusters get-credentials devops-cluster --region us-central1
         kubectl config view --minify
