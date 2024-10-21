@@ -9,16 +9,13 @@ env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: devops-cluster
   GKE_ZONE: us-central1
-  DEPLOYMENT_NAME: nginx-k8s
+  DEPLOYMENT_NAME: nginx-deployment
   IMAGE: nginx
 
 jobs:
   setup-build-publish-deploy:
     name: Setup, Build, Publish, and Deploy
     runs-on: ubuntu-latest
-    permissions:
-      contents: 'read'
-      id-token: 'write'
 
     steps:
     - name: Checkout
@@ -32,17 +29,8 @@ jobs:
     # Setup gcloud CLI
     - uses: google-github-actions/setup-gcloud@v2
 
-    - name: 'Deploy with gke-deploy cli'
-      uses: 'google-github-actions/deploy-gke-container@v0.1'
-      with:
-        image: nginx
-        app_name: 'nginx-deployment'
-        region: 'us-central1'
-        cluster_name: 'devops-cluster'
-        project_id: 'devops-437919'
-        expose: '80'
-
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
       run: |-
+        gcloud auth list
         kubectl get services -o wide
