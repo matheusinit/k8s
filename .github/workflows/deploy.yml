@@ -35,7 +35,7 @@ jobs:
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
       run: |-
-        gcloud container clusters get-credentials devops-cluster --region us-central1
+        gcloud container clusters get-credentials $GKE_CLUSTER --region $GKE_ZONE
         kubectl apply -f k8s/deployment.yml
         kubectl apply -f k8s/service.yml
 
